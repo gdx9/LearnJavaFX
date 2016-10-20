@@ -29,7 +29,21 @@ public class Attempt {
 		return mKind;
 	}
 	
+	public void tick(){
+		mRemaingSeconds--;
+	}
 	
+	public void save(){
+		System.out.printf("Saving %s %n",this);
+	}
 	
+	@Override
+	public String toString() {
+		return "Attempt{"+
+				"mKind=" + mKind +
+				"mMessage=" + mMessage + '\'' +
+				"mRemaingSeconds" + mRemaingSeconds +
+				"}";
+	}
 	
 }

@@ -11,7 +11,7 @@ public enum AttemptKind {
 		this.mTotalSeconds = mTotalSeconds;
 		this.mDisplayName = displayname;
 	}
-	
+
 	public int getTotalSeconds() {
 		return mTotalSeconds;
 	}
@@ -19,7 +19,5 @@ public enum AttemptKind {
 	public String getDisplayName(){
 		return mDisplayName;
 	}
-	
-	
 	
 }
