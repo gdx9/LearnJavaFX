@@ -1,0 +1,24 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root{
+	-fx-font-family: Papyrus;
+	-fx-alignment: center;
+	-fx-hgap: 10;
+	-fx-vgap: 10; 	
+}
+
+.title{
+	-fx-font-size: 80px;
+	-fx-fill: AQUA;
+}
+
+/* for all textfields */
+.text-field{
+	-fx-font-family: Helvetica;
+}
+
+#firstName{
+	-fx-background-color: red;
+	-fx-font-family: Impact;
+}
+

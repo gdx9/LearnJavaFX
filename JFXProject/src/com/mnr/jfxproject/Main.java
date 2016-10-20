@@ -53,7 +53,7 @@ public class Main extends Application {
 //			primaryStage.setTitle("Sup");
 //			primaryStage.setScene(new Scene(root,300,275));
 		
-		Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));// connect fxml file
+		Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/sample.fxml"));// connect fxml file
 		
 		primaryStage.setTitle("Sup");
 		primaryStage.setScene(new Scene(root,300,275));
