@@ -13,7 +13,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		// Load the font
-        //Font.loadFont(getClass().getResource("/resources/fonts/VarelaRound-Regular.ttf").toExternalForm(), 10);
+        Font.loadFont(getClass().getResource("/fonts/VarelaRound-Regular.ttf").toExternalForm(), 10);
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
 		
         primaryStage.setScene(new Scene(root, 500, 500));
