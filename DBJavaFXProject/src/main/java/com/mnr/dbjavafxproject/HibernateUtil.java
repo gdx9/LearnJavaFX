@@ -10,7 +10,9 @@ public class HibernateUtil {
 	
 	private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
 			
-	/*
+	/**
+	 * Create and return a {@link SessionFactory}
+	 * 
 	 * @return static SessionFactory for User class
 	 * @throw RuntimeException on fail
 	 */
