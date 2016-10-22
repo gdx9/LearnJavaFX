@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.mnr.dbjavafxproject.controller.Controller;
 import com.mnr.dbjavafxproject.entities.User;
-import com.mnr.dbjavafxproject.model.DatabaseHelper;
-import com.mnr.dbjavafxproject.model.JDBCHelper;
 
 import javafx.geometry.HPos;
 import javafx.scene.Group;
@@ -24,23 +22,25 @@ public class WindowManipulator {
 	
 	private Stage primaryStage;
 	private Group root;
-	private Scene windowScene;
 	
 	public WindowManipulator(Stage primaryStage) {
 		
 		this.primaryStage = primaryStage;
 		root = new Group();
-		this.windowScene = new Scene(root,280,300);
+		Scene windowScene = new Scene(root,320,300);
 		
 		primaryStage.setScene(windowScene);
 		primaryStage.show();
 		
 	}
 
+	/**
+	 * Draw an user add scene
+	 */
 	public void drawMainScene(){
 		
 		try {
-			
+			//Clear the root group
 			root.getChildren().clear();
 			
 			String titleText = "Add to db";
@@ -59,6 +59,12 @@ public class WindowManipulator {
 			Button confirmButton = new Button("OK");
 			Button checkDBDataBtn = new Button("check db");
 			
+			ComboBox<String> comboBox = new ComboBox<>(Controller.getAllConnections());//getItems().addAll(items)
+			comboBox.getSelectionModel().selectFirst();
+			comboBox.setOnAction(e->{
+				System.out.println(comboBox.getValue());
+			});
+			
 			//gridPane.setGridLinesVisible(true);
 			gridPane.add(welcomeText, 0, 0, 2, 1);
 			gridPane.add(nameText, 0, 1);
@@ -67,15 +73,10 @@ public class WindowManipulator {
 			gridPane.add(emailTF,1,2);
 			gridPane.add(birthText,0,3);
 			gridPane.add(ageTF,1,3);
-			gridPane.add(confirmButton, 0, 4, 2, 1);
-			gridPane.add(checkDBDataBtn, 0, 5, 2, 1);
+			gridPane.add(comboBox, 0, 4);
+			gridPane.add(confirmButton, 0, 5, 2, 1);
+			gridPane.add(checkDBDataBtn, 0, 6, 2, 1);
 			
-			ComboBox<String> comboBox = new ComboBox<>(Controller.getAllConnections());//getItems().addAll(items)
-			comboBox.getSelectionModel().selectFirst();
-			comboBox.setOnAction(e->{
-				System.out.println(comboBox.getValue());
-			});
-			gridPane.add(comboBox, 0, 6);
 			/*
 			ToggleGroup group = new ToggleGroup();
 			RadioButton rb1 = new RadioButton("b1");// text
@@ -121,9 +122,11 @@ public class WindowManipulator {
 			
 			//add listeners
 			confirmButton.setOnAction(e->{
-				if(Controller.takeUserFields(nameTF,emailTF,ageTF)){
+				//add user info to db if all is ok
+				if(Controller.takeUserFields(nameTF,emailTF,ageTF,comboBox)){
 					//addToDB();
 
+					//clear textfields
 					nameTF.setText("");
 					emailTF.setText("");
 					ageTF.setText("");
@@ -133,13 +136,10 @@ public class WindowManipulator {
 			});
 			checkDBDataBtn.setOnAction(e->{
 				checkDB();
-				primaryStage.setTitle("DB");
 			});
 			
 			root.getChildren().add(gridPane);
-			
-			JDBCHelper.writeToDB("Bill", "good",12);
-			
+			primaryStage.setTitle(titleText);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -152,12 +152,14 @@ public class WindowManipulator {
 	
 	
 	/**
-	 * Clear the root group, get all Users from Database and draw them all into Text fields
+	 * Draw user info scene, call get all Users method from Database and draw them all into Text areas
 	 * 
 	 */
 	private void checkDB(){
 		
+		//Clear the root group
 		root.getChildren().clear();
+		
 		Button goBackButton = new Button("Back");
 		goBackButton.setOnAction(e->{
 			drawMainScene();
@@ -176,7 +178,7 @@ public class WindowManipulator {
 		
 		GridPane grid = new GridPane();
 		
-		List<User> aList = DatabaseHelper.getAllUsersFromDB();
+		List<User> aList = Controller.getAllUsersDBInfo();
 		
 		int i = 0;
 		for (User user : aList) {
@@ -195,9 +197,8 @@ public class WindowManipulator {
 		vBox.getChildren().add(scrollPane);
 
 		root.getChildren().add(vBox);
-		System.out.println(aList.size());
+		primaryStage.setTitle("Check DB");
 		
 	}
-	
 	
 }
