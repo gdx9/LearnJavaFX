@@ -1,4 +1,4 @@
-package com.mnr.dbjavafxproject.jdbc;
+package com.mnr.dbjavafxproject.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 public class JDBCHelper {
 	
-	public void writeToDB(String name, String email, int age) throws SQLException{
+	public static void writeToDB(String name, String email, int age) throws SQLException{
 		
 		String sql = "INSERT INTO `users`(`user_name`,`user_email`,`user_age`) VALUES(?,?,?)";
 		
 		try(
-			Connection conn = DBUtil.getConnection();
+			Connection conn = JdbcUtil.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);	
 		){
 			
@@ -27,8 +27,12 @@ public class JDBCHelper {
 			}else{
 				System.out.println("Error while adding!");
 			}
+			
+			conn.commit();
+			
 		}catch (SQLException e) {
 			System.out.println("something go wrong");
+			e.printStackTrace();
 		}
 		
 	}

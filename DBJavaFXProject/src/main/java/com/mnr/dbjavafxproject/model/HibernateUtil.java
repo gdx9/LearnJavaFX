@@ -1,4 +1,4 @@
-package com.mnr.dbjavafxproject;
+package com.mnr.dbjavafxproject.model;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -37,27 +37,4 @@ public class HibernateUtil {
 		return SESSION_FACTORY;
 	}
 	
-	
-
-	/*private static final SessionFactory sessionFactory = buildSessionFactory();
-
-	private static SessionFactory buildSessionFactory() {
-		try {
-			Configuration configuration = new Configuration();
-			//configuration.addAnnotatedClass(User.class);// если НЕ пишем в hibernate.cfg.xml
-			configuration.configure();
-			return configuration
-					.buildSessionFactory(new StandardServiceRegistryBuilder()
-							.applySettings(configuration.getProperties())
-							.build());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("There was an error building the factory");
-		}
-	}
-	
-	public static SessionFactory getSessionFactory(){
-		return sessionFactory;
-	}*/
 }

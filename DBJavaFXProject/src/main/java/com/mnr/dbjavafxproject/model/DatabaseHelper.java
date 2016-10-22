@@ -1,4 +1,4 @@
-package com.mnr.dbjavafxproject;
+package com.mnr.dbjavafxproject.model;
 
 import java.util.List;
 
@@ -6,8 +6,20 @@ import org.hibernate.Session;
 
 import com.mnr.dbjavafxproject.entities.User;
 
-
 public class DatabaseHelper {
+
+	/**
+	 * Add values from textareas to the DB
+	 * and cleat all textfields
+	 * 
+	 */
+	public static void addToDB(String name,String email, int age) throws Exception{
+		
+		System.out.println( name + " " + email + " " + age );
+		
+		writeUserToDB(name,email,age);
+		
+	}
 	
 	/**
 	 * Create a new {@code User}} and write it into database
@@ -67,5 +79,4 @@ public class DatabaseHelper {
 		
 	}
 	
-
 }
