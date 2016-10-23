@@ -21,7 +21,7 @@ public class Controller {
 	 * 
 	 * @see ConnType
 	 */
-	public static final ObservableList<String> getAllConnections(){
+	public static final ObservableList<String> getAllConnectionTypes(){
 		ObservableList<String> items = FXCollections.observableArrayList(
 				ConnType.JDBC+"",
 				ConnType.HIBERNATE+"");

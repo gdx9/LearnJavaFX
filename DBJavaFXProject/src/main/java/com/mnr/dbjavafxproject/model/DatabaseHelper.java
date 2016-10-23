@@ -11,6 +11,8 @@ import com.mnr.dbjavafxproject.entities.User;
 
 public class DatabaseHelper {
 
+	private static Object obj = new Object();
+	
 	/**
 	 * Call Hibernate or JDBC Insert methods depends on conMeth parameter.
 	 * 
@@ -23,13 +25,17 @@ public class DatabaseHelper {
 		
 		if(conMeth == ConnType.HIBERNATE){
 			
-			//hibernate connection
-			writeUserHibernate(name,email,age);
+			synchronized (obj) {
+				//hibernate connection
+				writeUserHibernate(name,email,age);
+			}
 			
 		}else{
 			
-			//JDBC
-			writeUserJDBC(name, email, age);
+			synchronized (obj) {
+				//JDBC
+				writeUserJDBC(name, email, age);
+			}
 			
 		}
 		System.out.println( name + " " + email + " " + age );

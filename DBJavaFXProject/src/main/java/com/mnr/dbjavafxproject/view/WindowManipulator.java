@@ -5,6 +5,7 @@ import java.util.List;
 import com.mnr.dbjavafxproject.controller.Controller;
 import com.mnr.dbjavafxproject.entities.User;
 
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -59,7 +60,7 @@ public class WindowManipulator {
 			Button confirmButton = new Button("OK");
 			Button checkDBDataBtn = new Button("check db");
 			
-			ComboBox<String> comboBox = new ComboBox<>(Controller.getAllConnections());//getItems().addAll(items)
+			ComboBox<String> comboBox = new ComboBox<>(Controller.getAllConnectionTypes());//getItems().addAll(items)
 			comboBox.getSelectionModel().selectFirst();
 			comboBox.setOnAction(e->{
 				System.out.println(comboBox.getValue());
@@ -147,10 +148,6 @@ public class WindowManipulator {
 
 	}
 	
-	
-	
-	
-	
 	/**
 	 * Draw user info scene, call get all Users method from Database and draw them all into Text areas
 	 * 
@@ -178,17 +175,30 @@ public class WindowManipulator {
 		
 		GridPane grid = new GridPane();
 		
-		List<User> aList = Controller.getAllUsersDBInfo();
-		
-		int i = 0;
-		for (User user : aList) {
-			grid.add(new Text(user.getId()+""), 0, i);
-			grid.add(new Text(user.getName()+""), 1, i);
-			grid.add(new Text(user.getEmail()+""), 2, i);
-			grid.add(new Text(user.getAge()+""), 3, i);
+		// and add rows from database to GridPane after ui finished
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try{
+					//take dbdata
+					List<User> aList = Controller.getAllUsersDBInfo();
+					
+					int i = 0;
+					for (User user : aList) {
+						grid.add(new Text(user.getId()+""), 0, i);
+						grid.add(new Text(user.getName()+""), 1, i);
+						grid.add(new Text(user.getEmail()+""), 2, i);
+						grid.add(new Text(user.getAge()+""), 3, i);
 
-			i++;
-		}
+						i++;
+					}
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("db thread cancelled");
+				}
+			}
+		});
 		
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setPrefSize(280, 100);
