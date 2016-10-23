@@ -1,11 +1,13 @@
 package com.mnr.dbjavafxproject.view;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.mnr.dbjavafxproject.controller.Controller;
 import com.mnr.dbjavafxproject.entities.User;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -28,13 +30,33 @@ public class WindowManipulator {
 		
 		this.primaryStage = primaryStage;
 		root = new Group();
-		Scene windowScene = new Scene(root,320,300);
 		
-		primaryStage.setScene(windowScene);
+		primaryStage.setScene(new Scene(root,320,300));
 		primaryStage.show();
 		
 	}
 
+	public void drawMainSceneFXML(){
+		
+		root.getChildren().clear();
+		
+		try {
+			
+			root = FXMLLoader.load(getClass().getResource("/fxml/addNewUser.fxml"));// connect fxml file
+			
+			primaryStage.setTitle("Database Application");
+			primaryStage.setScene(new Scene(root,320,300));
+			primaryStage.show();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		
+	}
+	
 	/**
 	 * Draw an user add scene
 	 */
@@ -57,14 +79,15 @@ public class WindowManipulator {
 			Text birthText = new Text("Age:");
 			TextField ageTF = new TextField();
 			
-			Button confirmButton = new Button("OK");
-			Button checkDBDataBtn = new Button("check db");
-			
-			ComboBox<String> comboBox = new ComboBox<>(Controller.getAllConnectionTypes());//getItems().addAll(items)
-			comboBox.getSelectionModel().selectFirst();
-			comboBox.setOnAction(e->{
-				System.out.println(comboBox.getValue());
+			ComboBox<String> dbConncomboBox = new ComboBox<>(Controller.getAllConnectionTypes());//getItems().addAll(items)
+			dbConncomboBox.getSelectionModel().selectFirst();
+			dbConncomboBox.setOnAction(e->{
+				System.out.println(dbConncomboBox.getValue());
 			});
+			
+			Button confirmButton = new Button("OK");
+			Button checkDBDataBtn = new Button("Check db");
+			
 			
 			//gridPane.setGridLinesVisible(true);
 			gridPane.add(welcomeText, 0, 0, 2, 1);
@@ -74,7 +97,7 @@ public class WindowManipulator {
 			gridPane.add(emailTF,1,2);
 			gridPane.add(birthText,0,3);
 			gridPane.add(ageTF,1,3);
-			gridPane.add(comboBox, 0, 4);
+			gridPane.add(dbConncomboBox, 0, 4);
 			gridPane.add(confirmButton, 0, 5, 2, 1);
 			gridPane.add(checkDBDataBtn, 0, 6, 2, 1);
 			
@@ -124,7 +147,7 @@ public class WindowManipulator {
 			//add listeners
 			confirmButton.setOnAction(e->{
 				//add user info to db if all is ok
-				if(Controller.takeUserFields(nameTF,emailTF,ageTF,comboBox)){
+				if(Controller.takeUserFields(nameTF,emailTF,ageTF,dbConncomboBox)){
 					//addToDB();
 
 					//clear textfields
@@ -132,7 +155,7 @@ public class WindowManipulator {
 					emailTF.setText("");
 					ageTF.setText("");
 				}else{
-					System.out.println("fill text areas correctly!");
+					System.out.println("Fill text areas correctly!");
 				}
 			});
 			checkDBDataBtn.setOnAction(e->{

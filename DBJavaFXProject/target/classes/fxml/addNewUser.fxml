@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.Group?>
+
+<Group fx:id="rootGroup" fx:controller="com.mnr.dbjavafxproject.controller.AddUserController"
+		xmlns:fx="http://javafx.com/fxml">
+
+	<!-- 	stylesheets="/resources/css/application.css" -->
+	<GridPane fx:id="gridPane"
+		alignment="center"
+		hgap="10" vgap="10" >
+		
+		<Text fx:id="welcomeText"
+			text="Add User"
+			GridPane.rowIndex="0"
+			GridPane.columnIndex="0"
+			GridPane.columnSpan="2"
+			GridPane.halignment="CENTER" />
+		
+		<Label text="Name: "
+			GridPane.rowIndex="1"
+			GridPane.columnIndex="0" />
+		<TextField fx:id="nameTF"
+			GridPane.rowIndex="1"
+			GridPane.columnIndex="1"/>
+		
+		<Label text="Email: "
+			GridPane.rowIndex="3"
+			GridPane.columnIndex="0" />
+		<TextField fx:id="emailTF"
+			GridPane.rowIndex="3"
+			GridPane.columnIndex="1"/>
+		
+		<Label text="Age: "
+			GridPane.rowIndex="4"
+			GridPane.columnIndex="0" />
+		<TextField fx:id="ageTF"
+			GridPane.rowIndex="4"
+			GridPane.columnIndex="1" />
+		
+		<ComboBox fx:id="dbConncomboBox"
+			GridPane.rowIndex="5"
+			GridPane.columnIndex="0" />
+		<Button fx:id="confirmButton"
+			text="OK"
+			GridPane.rowIndex="6"
+			GridPane.columnIndex="1"
+			GridPane.halignment="CENTER"
+			onAction="#addUser" />
+		<Button fx:id="checkDBDataBtn"
+			text="Check db"
+			GridPane.rowIndex="7"
+			GridPane.columnIndex="1"
+			GridPane.halignment="RIGHT"
+			onAction="#checkDB" />
+		
+	</GridPane>
+	
+</Group>

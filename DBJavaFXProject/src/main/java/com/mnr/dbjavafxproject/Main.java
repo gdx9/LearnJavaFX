@@ -14,7 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		WindowManipulator wm = new WindowManipulator(primaryStage);
-		wm.drawMainScene();
+		wm.drawMainSceneFXML();
 		
 		//exit on close
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

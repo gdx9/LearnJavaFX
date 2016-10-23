@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+	
+<VBox fx:id="vBox" fx:controller="com.mnr.dbjavafxproject.controller.CheckUsersController"
+	xmlns:fx="http://javafx.com/fxml">
+
+	<HBox fx:id="hBox">
+	
+		<Button fx:id="goBackButton"
+		text="Back"
+		onAction="#addUser"/>
+		
+		<Button fx:id="reloadButton"
+		text="Reload"
+		onAction="#reloadUsers"/>
+		
+	</HBox>
+	
+	<ScrollPane fx:id="scrollPane"
+		prefWidth="280"
+		prefHeight="100" >
+	
+		<GridPane fx:id="gridPane"/>
+	
+	</ScrollPane>
+
+</VBox>
